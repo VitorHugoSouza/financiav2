@@ -44,7 +44,7 @@ export default function Formulario() {
 
                     <TextField 
                         label="Idade"
-                        style={{ marginLeft: 20, minWidth: 180, marginTop: 10 }} 
+                        style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }} 
                         variant="outlined"
                         name="Idade"
                         onChange={handleChange}
@@ -90,7 +90,7 @@ export default function Formulario() {
 
 
                     <TextField 
-                        style={{ marginLeft: 20, minWidth: 180, marginTop: 10 }}
+                        style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}
                         label="Renda mensal (em R$)" 
                         variant="outlined"
                         name="RendaMensal"
