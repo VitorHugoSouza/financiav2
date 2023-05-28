@@ -12,6 +12,8 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -77,7 +79,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Home() {
   
-  const [open] = useState(true);
+  const [open, setOpen] = useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
   return (
       <Box sx={{ display: 'flex' }}>
@@ -88,6 +93,18 @@ export default function Home() {
               pr: '24px', // keep right padding when drawer closed
             }}
           >
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
             
             <Typography
               component="h1"
@@ -119,6 +136,10 @@ export default function Home() {
             >
               <b>Financ.ia</b>
             </Typography>
+          
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
           </div>
           
           <Divider />

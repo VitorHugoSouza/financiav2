@@ -44,7 +44,7 @@ export default function Formulario() {
 
                     <TextField 
                         label="Idade"
-                        style={{ marginLeft: 20, minWidth: 200, marginTop: 10 }} 
+                        style={{ marginLeft: 20, minWidth: 180, marginTop: 10 }} 
                         variant="outlined"
                         name="Idade"
                         onChange={handleChange}
@@ -55,7 +55,7 @@ export default function Formulario() {
                              value={dados.Idade} required="required" /> */}
 
 
-                    <FormControl style={{ marginLeft: 20, minWidth: 200, marginTop: 10 }}>
+                    <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
                         <InputLabel>Sexo</InputLabel>
                         <Select
                             id="sexo"
@@ -70,7 +70,7 @@ export default function Formulario() {
                         </Select>
                     </FormControl>
 
-                    <FormControl style={{ marginLeft: 20, minWidth: 200, marginTop: 10 }}>
+                    <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
                     <InputLabel>Estado Civil</InputLabel>
                     <Select
                         id="estadoCivil"
@@ -99,8 +99,9 @@ export default function Formulario() {
                     />
 
                     <Button 
-                        type="submit" 
-                        style={{ marginLeft: 20, marginTop: 7 }} startIcon={<Check />}
+                        type="submit"
+                        variant="outlined" 
+                        style={{ marginLeft: 20, marginTop: 15 }} startIcon={<Check />}
                     >Analisar</Button>
                 </div>
 
