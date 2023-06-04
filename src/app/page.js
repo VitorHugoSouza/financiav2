@@ -78,107 +78,105 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 export default function Home() {
-  
+
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Performance em análise
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                {/* <NotificationsIcon /> */}
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          
-          <div style={{ display: 'flex', alignItems: 'flex-start', paddingBottom: '5px', paddingTop: '10px', paddingLeft: '10px'}}>
-            <Image src={Logo} alt="Logo Financia" width={50} placeholder='Financ.ia' loading="lazy"/> 
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-              style={{display: 'flex', marginTop: '5px', marginLeft: '20px'}}
-            >
-              <b>Financ.ia</b>
-            </Typography>
-          
-              <IconButton onClick={toggleDrawer}>
-                <ChevronLeftIcon />
-              </IconButton>
-          </div>
-          
-          <Divider />
-          <List component="nav">
-          </List>
-        </Drawer>
-        <Box
-          component="main"
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="absolute" open={open}>
+        <Toolbar
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
+            pr: '24px', // keep right padding when drawer closed
           }}
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Forms */}
-              <Grid item xs={12} md={12} lg={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 550,
-                  }}
-                >
-                  <Formulario />
-                </Paper>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
-          </Container>
-        </Box>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleDrawer}
+            sx={{
+              marginRight: '36px',
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
+            Performance em análise
+          </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={0} color="secondary">
+              {/* <NotificationsIcon /> */}
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open}>
+
+        <div style={{ display: 'flex', alignItems: 'flex-start', paddingBottom: '5px', paddingTop: '10px', paddingLeft: '10px' }}>
+          <Image src={Logo} alt="Logo Financia" width={50} placeholder='Financ.ia' loading="lazy" />
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+            style={{ display: 'flex', marginTop: '5px', marginLeft: '20px' }}
+          >
+            <b>Financ.ia</b>
+          </Typography>
+
+          <IconButton onClick={toggleDrawer}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+
+        <Divider />
+        <List component="nav">
+        </List>
+      </Drawer>
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'light'
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+          flexGrow: 1,
+          height: '100vh',
+          overflow: 'auto',
+        }}
+      >
+        <Toolbar />
+        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          {/* Forms */}
+          <Grid item xs={12} md={12} lg={12}>
+            <Paper
+              sx={{
+                p: 2,
+                display: 'flex',
+                flexDirection: 'column',
+                height: 800,
+              }}
+            >
+              <Formulario />
+            </Paper>
+          </Grid>
+          <Copyright sx={{ pt: 4 }} />
+        </Container>
       </Box>
+    </Box>
   );
 
 }

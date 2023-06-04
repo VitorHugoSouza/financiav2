@@ -1,5 +1,5 @@
 'use client';
-import { Check, Save } from "@mui/icons-material";
+import { Check } from "@mui/icons-material";
 import { Alert, Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
 import { useState } from "react";
 import api from "../service/api-config";
@@ -12,7 +12,16 @@ function Resultado(result, dados) {
       <p>Resultado: <b>{result.resultado === 1 ? 'Pessoa será inadimplente' : 'Pessoa não será inadimplente'}</b></p>
       <p>Probabilidade de pagamento das dívidas: <b>{result.probabilidade_pagar * 100}%</b></p>
       <p>Probabilidade de não honrar o pagamento: <b>{result.probabilidade_nao_pagar * 100}%</b></p>
-      <p>O ideal é que o valor de crédito não ultrapasse: {result.resultado === 1 ? <b>R$ 0</b> : <b>R$ {dados.RendaMensal * 0.25}</b>}</p>
+      {dados.FormaPgto !== 1 && dados.FormaPgto !== 4 ? "" :
+        <p>Por segurança o valor de crédito não deve ultrapassar:
+          {result.resultado === 1 ? <b>R$ 0</b> :
+            dados.Historico === 2 && (dados.FormaPgto === 1 || dados.FormaPgto === 4) ?
+              <b>R$ 0</b> :
+              dados.Historico === 1 && (dados.FormaPgto === 1 || dados.FormaPgto === 4) ?
+                <b>R$ {dados.RendaMensal * 0.15}</b> : <b>R$ {dados.RendaMensal * 0.3}</b>
+          }
+        </p>
+      }
     </>
   )
 }
@@ -24,7 +33,9 @@ export default function Formulario() {
     Idade: '',
     Sexo: '',
     EstadoCivil: '',
-    RendaMensal: ''
+    RendaMensal: '',
+    Historico: '',
+    FormaPgto: ''
   });
   const [result, setResult] = useState([]);
   const [mostrar, setMostrar] = useState(false);
@@ -95,9 +106,9 @@ export default function Formulario() {
               onChange={handleChange}
               required
             >
-              <MenuItem value={0} title="Não informado">Não informado</MenuItem>
-              <MenuItem value={1} title="Feminino">Feminino</MenuItem>
-              <MenuItem value={2} title="Masculino">Masculino</MenuItem>
+              <MenuItem value={0}>Não informado</MenuItem>
+              <MenuItem value={1}>Feminino</MenuItem>
+              <MenuItem value={2}>Masculino</MenuItem>
             </Select>
           </FormControl>
 
@@ -112,12 +123,12 @@ export default function Formulario() {
               onChange={handleChange}
               required
             >
-              <MenuItem value={0} title="Não informado">Não informado</MenuItem>
-              <MenuItem value={1} title="Casado(a)">Casado(a)</MenuItem>
-              <MenuItem value={2} title="Divorciado(a)">Divorciado(a)</MenuItem>
-              <MenuItem value={3} title="Separado(a)">Separado(a)</MenuItem>
-              <MenuItem value={4} title="Solteiro(a)">Solteiro(a)</MenuItem>
-              <MenuItem value={5} title="Viúvo(a)">Viúvo(a)</MenuItem>
+              <MenuItem value={0}>Não informado</MenuItem>
+              <MenuItem value={1}>Casado(a)</MenuItem>
+              <MenuItem value={2}>Divorciado(a)</MenuItem>
+              <MenuItem value={3}>Separado(a)</MenuItem>
+              <MenuItem value={4}>Solteiro(a)</MenuItem>
+              <MenuItem value={5}>Viúvo(a)</MenuItem>
             </Select>
           </FormControl>
 
@@ -132,6 +143,45 @@ export default function Formulario() {
             value={dados.RendaMensal}
             required
           />
+
+          <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
+            <InputLabel required>Média de Pagamento</InputLabel>
+            <Select
+              id="FormaPgto"
+              name="FormaPgto"
+              title="Média em que o cliente mais realiza o pagamento"
+              value={dados.FormaPgto}
+              label="Média de Pagamento"
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value={0} title="Cartão">Cartão</MenuItem>
+              <MenuItem value={1} title="Cheque">Cheque</MenuItem>
+              <MenuItem value={2} title="Dinheiro">Dinheiro</MenuItem>
+              <MenuItem value={3} title="Pix">Pix</MenuItem>
+              <MenuItem value={4} title="Prazo">Prazo</MenuItem>
+            </Select>
+          </FormControl>
+
+          {dados.FormaPgto !== 1 && dados.FormaPgto !== 4 ? "" :
+
+            <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
+              <InputLabel required>Histórico Cliente</InputLabel>
+              <Select
+                id="Historico"
+                name="Historico"
+                title="O cliente possui que tipo de histórico"
+                value={dados.Historico}
+                label="Histórico Cliente"
+                onChange={handleChange}
+                required
+              >
+                <MenuItem value={0}>Bom</MenuItem>
+                <MenuItem value={1}>Médio</MenuItem>
+                <MenuItem value={2}>Ruim</MenuItem>
+              </Select>
+            </FormControl>
+          }
 
           <Button
             type="submit"
