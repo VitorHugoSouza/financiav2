@@ -166,13 +166,13 @@ export default function Formulario() {
           {dados.FormaPgto !== 1 && dados.FormaPgto !== 4 ? "" :
 
             <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
-              <InputLabel required>Histórico Cliente</InputLabel>
+              <InputLabel required>Histórico Pagamento</InputLabel>
               <Select
                 id="Historico"
                 name="Historico"
                 title="O cliente possui que tipo de histórico"
                 value={dados.Historico}
-                label="Histórico Cliente"
+                label="Histórico Pagamento"
                 onChange={handleChange}
                 required
               >
@@ -191,8 +191,6 @@ export default function Formulario() {
         </div>
 
       </form>
-
-
 
       <div style={{ marginTop: 20 }}>
         {result.length === 0 ? "" : !!mostrar ? <CircularProgress /> : Resultado(result, dados)}

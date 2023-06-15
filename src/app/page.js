@@ -19,11 +19,11 @@ import Image from 'next/image';
 import Logo from '../app/assets/img/logo_financia_t.png';
 import Formulario from './formulario/Formulario';
 import { ListItemButton, ListItemIcon, ListItemText, Paper } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import Link from 'next/link';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import Chart from './components/Chart';
 import EstadoCivil from './components/EstadoCivil';
+import HomeIcon from '@mui/icons-material/Home';
+import InadimplentesSexo from './components/InadimplentesSexo';
 
 function Copyright(props) {
   return (
@@ -151,7 +151,7 @@ export default function Home() {
           <Link href='/'>
             <ListItemButton>
               <ListItemIcon>
-                <DashboardIcon />
+                <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Início" />
             </ListItemButton>
@@ -180,33 +180,7 @@ export default function Home() {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            {/* Estado Civil */}
-            <Grid item xs={12} md={8} lg={12}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: 240,
-                }}
-              >
-                <EstadoCivil />
-              </Paper>
-            </Grid>
-            {/* Forms */}
-            <Grid item xs={12} md={8} lg={8}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: 800,
-                }}
-              >
-                <Formulario />
-              </Paper>
-            </Grid>
+          <Grid container spacing={2}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={4}>
               <Paper
@@ -218,6 +192,48 @@ export default function Home() {
                 }}
               >
                 <Chart />
+              </Paper>
+            </Grid>            
+            {/* Estado Civil */}
+            <Grid item xs={12} md={8} lg={8}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240,
+                }}
+              >
+                <EstadoCivil />
+              </Paper>
+            </Grid>
+            {/* Inadimplentes X Sexo */}
+            <Grid item xs={12} md={8} lg={4}>
+              <Paper
+                sx={{
+                  paddingLeft: 2,
+                  paddingTop: 2,
+                  paddingRight: 0,
+                  marginRight: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240,
+                }}
+              >
+                <InadimplentesSexo />
+              </Paper>
+            </Grid>            
+            {/* Forms */}
+            <Grid item xs={12} md={8} lg={8}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 800,
+                }}
+              >
+                <Formulario />
               </Paper>
             </Grid>
           </Grid>
