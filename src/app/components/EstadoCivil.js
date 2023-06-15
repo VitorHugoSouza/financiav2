@@ -1,35 +1,41 @@
-import { XAxis, YAxis, ResponsiveContainer, BarChart, Bar, Tooltip } from 'recharts';
+import { XAxis, YAxis, ResponsiveContainer, BarChart, Bar, Tooltip, CartesianGrid, Legend } from 'recharts';
 import Title from './Title';
 
 const estadoCivil = [
   {
     name: 'Casado(a)',
-    Total: 537,
+    Não: 440,
+    Sim: 97,
     amt: 2000,
   },
   {
     name: 'Divorciado(a)',
-    Total: 11,
+    Não: 10,
+    Sim: 1,
     amt: 400,
   },
   {
     name: 'Sem Class.',
-    Total: 1176,
+    Não: 1036,
+    Sim: 140,
     amt: 400,
   },
   {
     name: 'Separado(a)',
-    Total: 9,
+    Não: 8,
+    Sim: 1,
     amt: 400,
   },
   {
     name: 'Solteiro(a)',
-    Total: 166,
+    Não: 146,
+    Sim: 20,
     amt: 400,
   },
   {
     name: 'Viúvo(a)',
-    Total: 18,
+    Não: 14,
+    Sim: 4,
     amt: 400,
   },
 ];
@@ -38,7 +44,7 @@ export default function Chart() {
 
   return (
     <>
-      <Title>Estado Civil</Title>
+      <Title>Inadimplentes X Estado Civil</Title>
 
       <ResponsiveContainer width="100%" height="100%">
         <BarChart width={200}
@@ -47,10 +53,13 @@ export default function Chart() {
           margin={{
             top: 5,
           }}>
-            <Tooltip />
-            <XAxis dataKey="name" />
-            <YAxis />
-          <Bar dataKey="Total" fill="#8884d8" />
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="Não" fill="#8884d8" />
+          <Bar dataKey="Sim" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
     </>
