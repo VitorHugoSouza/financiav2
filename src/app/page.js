@@ -14,12 +14,16 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useState } from 'react';
 import Image from 'next/image';
 import Logo from '../app/assets/img/logo_financia_t.png';
 import Formulario from './formulario/Formulario';
-import { Paper } from '@mui/material';
+import { ListItemButton, ListItemIcon, ListItemText, Paper } from '@mui/material';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import Link from 'next/link';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import Chart from './components/Chart';
+import EstadoCivil from './components/EstadoCivil';
 
 function Copyright(props) {
   return (
@@ -144,6 +148,22 @@ export default function Home() {
 
         <Divider />
         <List component="nav">
+          <Link href='/'>
+            <ListItemButton>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Início" />
+            </ListItemButton>
+          </Link>
+          {/* <Link href='/relatorio'>
+            <ListItemButton>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Relatório" />
+            </ListItemButton>
+          </Link> */}
         </List>
       </Drawer>
       <Box
@@ -160,18 +180,46 @@ export default function Home() {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          {/* Forms */}
-          <Grid item xs={12} md={12} lg={12}>
-            <Paper
-              sx={{
-                p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                height: 800,
-              }}
-            >
-              <Formulario />
-            </Paper>
+          <Grid container spacing={3}>
+            {/* Estado Civil */}
+            <Grid item xs={12} md={8} lg={12}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240,
+                }}
+              >
+                <EstadoCivil />
+              </Paper>
+            </Grid>
+            {/* Forms */}
+            <Grid item xs={12} md={8} lg={8}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 800,
+                }}
+              >
+                <Formulario />
+              </Paper>
+            </Grid>
+            {/* Chart */}
+            <Grid item xs={12} md={8} lg={4}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240,
+                }}
+              >
+                <Chart />
+              </Paper>
+            </Grid>
           </Grid>
           <Copyright sx={{ pt: 4 }} />
         </Container>
