@@ -24,6 +24,9 @@ import Chart from './components/Chart';
 import EstadoCivil from './components/EstadoCivil';
 import HomeIcon from '@mui/icons-material/Home';
 import InadimplentesSexo from './components/InadimplentesSexo';
+import Inadimplencia from './components/Inadimplencia';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import LoginIcon from '@mui/icons-material/Login';
 
 function Copyright(props) {
   return (
@@ -121,7 +124,7 @@ export default function Home() {
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
-              {/* <NotificationsIcon /> */}
+              <LoginIcon />
             </Badge>
           </IconButton>
         </Toolbar>
@@ -156,14 +159,14 @@ export default function Home() {
               <ListItemText primary="Início" />
             </ListItemButton>
           </Link>
-          {/* <Link href='/relatorio'>
-            <ListItemButton>
+          {/* <Link href='/relatorio'> */}
+            <ListItemButton disabled>
               <ListItemIcon>
-                <BarChartIcon />
+                <PictureAsPdfIcon />
               </ListItemIcon>
-              <ListItemText primary="Relatório" />
+              <ListItemText primary="Relatórios (em breve)" disableTypography={true} />
             </ListItemButton>
-          </Link> */}
+          {/* </Link> */}
         </List>
       </Drawer>
       <Box
@@ -193,19 +196,6 @@ export default function Home() {
               >
                 <Chart />
               </Paper>
-            </Grid>            
-            {/* Estado Civil */}
-            <Grid item xs={12} md={8} lg={8}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: 240,
-                }}
-              >
-                <EstadoCivil />
-              </Paper>
             </Grid>
             {/* Inadimplentes X Sexo */}
             <Grid item xs={12} md={8} lg={4}>
@@ -222,9 +212,38 @@ export default function Home() {
               >
                 <InadimplentesSexo />
               </Paper>
-            </Grid>            
+            </Grid>
+            {/* Inadimplencia */}
+            <Grid item xs={12} md={8} lg={4}>
+              <Paper
+                sx={{
+                  paddingLeft: 2,
+                  paddingTop: 2,
+                  paddingRight: 0,
+                  marginRight: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240,
+                }}
+              >
+                <Inadimplencia />
+              </Paper>
+            </Grid>
+            {/* Estado Civil */}
+            <Grid item xs={12} md={8} lg={6}>
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240,
+                }}
+              >
+                <EstadoCivil />
+              </Paper>
+            </Grid>
             {/* Forms */}
-            <Grid item xs={12} md={8} lg={8}>
+            <Grid item xs={12} md={8} lg={6}>
               <Paper
                 sx={{
                   p: 2,
