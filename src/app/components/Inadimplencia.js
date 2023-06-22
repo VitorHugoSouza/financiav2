@@ -4,12 +4,12 @@ import Title from './Title';
 const data = [
   {
     name: 'Maio',
-    Inadimplência: 13.71,
+    Inadimplência: 15.90,
     amt: 20,
   },
   {
     name: 'Junho',
-    Inadimplência: 12.53,
+    Inadimplência: 13.0,
     amt: 20,
   },
 ];
@@ -18,7 +18,7 @@ export default function Inadimplencia() {
 
   return (
     <>
-      <Title>Inadimplência mês (%)</Title>
+      <Title>Inadimplência mensal</Title>
 
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
