@@ -1,8 +1,6 @@
 {
   "name": "financiav2",
-  "version": "0.2.1",
-  "title": "FINANC.IA - Performance em análise de clientes",
-  "description": "Criado por - Vitor Hugo de Souza",
+  "version": "0.3.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
