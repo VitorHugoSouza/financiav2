@@ -88,11 +88,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: 'FINANC.IA - Performance em análise de clientes',
-  description: 'Criado por - Vitor Hugo de Souza',
-}
-
 export default function RootLayout({ children }) {
 
   const [open, setOpen] = useState(false);
