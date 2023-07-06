@@ -1,8 +1,12 @@
 'use client';
-import { Check } from "@mui/icons-material";
-import { Alert, Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField } from "@mui/material";
+import { Check, Copyright } from "@mui/icons-material";
+import { Alert, Box, Button, CircularProgress, Container, FormControl, Grid, InputLabel, MenuItem, Paper, Select, Snackbar, TextField, Toolbar } from "@mui/material";
 import { useState } from "react";
 import api from "../service/api-config";
+import Chart from "../components/Chart";
+import InadimplentesSexo from "../components/InadimplentesSexo";
+import Inadimplencia from "../components/Inadimplencia";
+import EstadoCivil from '../components/EstadoCivil';
 
 function Resultado(result, dados) {
   return (
@@ -71,131 +75,227 @@ export default function Formulario() {
   };
 
   return (
-    <div>
+    <>
+      
 
-      <Snackbar open={open} autoHideDuration={4500} onClose={handleClose}>
-        <Alert severity="error">Não foi possível buscar os dados da API!</Alert>
-      </Snackbar>
+        <Snackbar open={open} autoHideDuration={4500} onClose={handleClose}>
+          <Alert severity="error">Não foi possível buscar os dados da API!</Alert>
+        </Snackbar>
 
-      <h3>Preencha os campos a seguir para realizar a análise!</h3>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={2}>
+              {/* Chart */}
+              <Grid item xs={12} md={8} lg={4}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <Chart />
+                </Paper>
+              </Grid>
+              {/* Inadimplentes X Sexo */}
+              <Grid item xs={12} md={8} lg={4}>
+                <Paper
+                  sx={{
+                    paddingLeft: 2,
+                    paddingTop: 2,
+                    paddingRight: 0,
+                    marginRight: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <InadimplentesSexo />
+                </Paper>
+              </Grid>
+              {/* Inadimplencia */}
+              <Grid item xs={12} md={8} lg={4}>
+                <Paper
+                  sx={{
+                    paddingLeft: 2,
+                    paddingTop: 2,
+                    paddingRight: 0,
+                    marginRight: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <Inadimplencia />
+                </Paper>
+              </Grid>
+              {/* Estado Civil */}
+              <Grid item xs={12} md={8} lg={6}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <EstadoCivil />
+                </Paper>
+              </Grid>
+              {/* Forms */}
+              <Grid item xs={12} md={8} lg={6}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 800,
+                  }}
+                >
 
-      <form onSubmit={onSubmitCategoria}>
-
-        <div style={{ marginTop: '15px' }}>
-
-          <TextField
-            label="Idade"
-            style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}
-            variant="outlined"
-            name="Idade"
-            title="Idade"
-            onChange={handleChange}
-            value={dados.Idade}
-            autoFocus
-            required
-          />
-
-          <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
-            <InputLabel required>Sexo</InputLabel>
-            <Select
-              id="sexo"
-              value={dados.Sexo}
-              label="Sexo"
-              name="Sexo"
-              title="Sexo"
-              onChange={handleChange}
-              required
-            >
-              <MenuItem value={0}>Não informado</MenuItem>
-              <MenuItem value={1}>Feminino</MenuItem>
-              <MenuItem value={2}>Masculino</MenuItem>
-            </Select>
-          </FormControl>
-
-          <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
-            <InputLabel required>Estado Civil</InputLabel>
-            <Select
-              id="estadoCivil"
-              name="EstadoCivil"
-              title="Estado Civil"
-              value={dados.EstadoCivil}
-              label="Estado Civil"
-              onChange={handleChange}
-              required
-            >
-              <MenuItem value={0}>Não informado</MenuItem>
-              <MenuItem value={1}>Casado(a)</MenuItem>
-              <MenuItem value={2}>Divorciado(a)</MenuItem>
-              <MenuItem value={3}>Separado(a)</MenuItem>
-              <MenuItem value={4}>Solteiro(a)</MenuItem>
-              <MenuItem value={5}>Viúvo(a)</MenuItem>
-            </Select>
-          </FormControl>
 
 
-          <TextField
-            style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}
-            label="Renda mensal"
-            title="Renda mensal aproximada"
-            variant="outlined"
-            name="RendaMensal"
-            onChange={handleChange}
-            value={dados.RendaMensal}
-            required
-          />
+                  <h3>Preencha os campos a seguir para realizar a análise!</h3>
 
-          <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
-            <InputLabel required>Média de Pagamento</InputLabel>
-            <Select
-              id="FormaPgto"
-              name="FormaPgto"
-              title="Média em que o cliente mais realiza o pagamento"
-              value={dados.FormaPgto}
-              label="Média de Pagamento"
-              onChange={handleChange}
-              required
-            >
-              <MenuItem value={0} title="Cartão">Cartão</MenuItem>
-              <MenuItem value={1} title="Cheque">Cheque</MenuItem>
-              <MenuItem value={2} title="Dinheiro">Dinheiro</MenuItem>
-              <MenuItem value={3} title="Pix">Pix</MenuItem>
-              <MenuItem value={4} title="Prazo">Prazo</MenuItem>
-            </Select>
-          </FormControl>
+                  <form onSubmit={onSubmitCategoria}>
 
-          {dados.FormaPgto !== 1 && dados.FormaPgto !== 4 ? "" :
+                    <div style={{ marginTop: '15px' }}>
 
-            <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
-              <InputLabel required>Histórico Pagamento</InputLabel>
-              <Select
-                id="Historico"
-                name="Historico"
-                title="O cliente possui que tipo de histórico"
-                value={dados.Historico}
-                label="Histórico Pagamento"
-                onChange={handleChange}
-                required
-              >
-                <MenuItem value={0}>Bom</MenuItem>
-                <MenuItem value={1}>Médio</MenuItem>
-                <MenuItem value={2}>Ruim</MenuItem>
-              </Select>
-            </FormControl>
-          }
+                      <TextField
+                        label="Idade"
+                        style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}
+                        variant="outlined"
+                        name="Idade"
+                        title="Idade"
+                        onChange={handleChange}
+                        value={dados.Idade}
+                        autoFocus
+                        required
+                      />
 
-          <Button
-            type="submit"
-            variant="outlined"
-            style={{ marginLeft: 20, marginTop: 15 }} startIcon={<Check />}
-          >Analisar</Button>
-        </div>
+                      <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
+                        <InputLabel required>Sexo</InputLabel>
+                        <Select
+                          id="sexo"
+                          value={dados.Sexo}
+                          label="Sexo"
+                          name="Sexo"
+                          title="Sexo"
+                          onChange={handleChange}
+                          required
+                        >
+                          <MenuItem value={0}>Não informado</MenuItem>
+                          <MenuItem value={1}>Feminino</MenuItem>
+                          <MenuItem value={2}>Masculino</MenuItem>
+                        </Select>
+                      </FormControl>
 
-      </form>
+                      <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
+                        <InputLabel required>Estado Civil</InputLabel>
+                        <Select
+                          id="estadoCivil"
+                          name="EstadoCivil"
+                          title="Estado Civil"
+                          value={dados.EstadoCivil}
+                          label="Estado Civil"
+                          onChange={handleChange}
+                          required
+                        >
+                          <MenuItem value={0}>Não informado</MenuItem>
+                          <MenuItem value={1}>Casado(a)</MenuItem>
+                          <MenuItem value={2}>Divorciado(a)</MenuItem>
+                          <MenuItem value={3}>Separado(a)</MenuItem>
+                          <MenuItem value={4}>Solteiro(a)</MenuItem>
+                          <MenuItem value={5}>Viúvo(a)</MenuItem>
+                        </Select>
+                      </FormControl>
 
-      <div style={{ marginTop: 20 }}>
-        {result.length === 0 ? "" : !!mostrar ? <CircularProgress /> : Resultado(result, dados)}
-      </div>
 
-    </div>
+                      <TextField
+                        style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}
+                        label="Renda mensal"
+                        title="Renda mensal aproximada"
+                        variant="outlined"
+                        name="RendaMensal"
+                        onChange={handleChange}
+                        value={dados.RendaMensal}
+                        required
+                      />
+
+                      <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
+                        <InputLabel required>Média de Pagamento</InputLabel>
+                        <Select
+                          id="FormaPgto"
+                          name="FormaPgto"
+                          title="Média em que o cliente mais realiza o pagamento"
+                          value={dados.FormaPgto}
+                          label="Média de Pagamento"
+                          onChange={handleChange}
+                          required
+                        >
+                          <MenuItem value={0} title="Cartão">Cartão</MenuItem>
+                          <MenuItem value={1} title="Cheque">Cheque</MenuItem>
+                          <MenuItem value={2} title="Dinheiro">Dinheiro</MenuItem>
+                          <MenuItem value={3} title="Pix">Pix</MenuItem>
+                          <MenuItem value={4} title="Prazo">Prazo</MenuItem>
+                        </Select>
+                      </FormControl>
+
+                      {dados.FormaPgto !== 1 && dados.FormaPgto !== 4 ? "" :
+
+                        <FormControl style={{ marginLeft: 20, minWidth: 220, marginTop: 10 }}>
+                          <InputLabel required>Histórico Pagamento</InputLabel>
+                          <Select
+                            id="Historico"
+                            name="Historico"
+                            title="O cliente possui que tipo de histórico"
+                            value={dados.Historico}
+                            label="Histórico Pagamento"
+                            onChange={handleChange}
+                            required
+                          >
+                            <MenuItem value={0}>Bom</MenuItem>
+                            <MenuItem value={1}>Médio</MenuItem>
+                            <MenuItem value={2}>Ruim</MenuItem>
+                          </Select>
+                        </FormControl>
+                      }
+
+                      <Button
+                        type="submit"
+                        variant="outlined"
+                        style={{ marginLeft: 20, marginTop: 15 }} startIcon={<Check />}
+                      >Analisar</Button>
+                    </div>
+
+                  </form>
+
+                  <div style={{ marginTop: 20 }}>
+                    {result.length === 0 ? "" : !!mostrar ? <CircularProgress /> : Resultado(result, dados)}
+                  </div>
+
+                
+
+              </Paper>
+            </Grid>
+          </Grid>
+          <Copyright sx={{ pt: 4 }} />
+        </Container>
+      </Box>
+
+    </>
   );
 }
