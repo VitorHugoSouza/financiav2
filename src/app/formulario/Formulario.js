@@ -13,9 +13,9 @@ function Resultado(result, dados) {
     <>
       <p>De acordo com a análise dos dados informados:</p>
       <p style={{ marginTop: 5 }}></p>
-      <p>Resultado: <b>{result.resultado === 1 ? 'Pessoa será inadimplente' : 'Pessoa não será inadimplente'}</b></p>
-      <p>Probabilidade de pagamento das dívidas: <b>{result.probabilidade_pagar * 100}%</b></p>
-      <p>Probabilidade de não honrar o pagamento: <b>{result.probabilidade_nao_pagar * 100}%</b></p>
+      <p>Resultado: {result.resultado === 1 ? <b style={{ color: 'red'}}>Pessoa será inadimplente</b> : <b style={{ color: 'green'}}>Pessoa não será inadimplente</b>}</p>
+      <p>Probabilidade de pagamento das dívidas: <b>{Math.round(result.probabilidade_pagar * 100, -1)}%</b></p>
+      <p>Probabilidade de não honrar o pagamento: <b>{Math.round(result.probabilidade_nao_pagar * 100, -1)}%</b></p>
       {dados.FormaPgto !== 1 && dados.FormaPgto !== 4 ? "" :
         <p>Por segurança o valor de crédito não deve ultrapassar:
           {result.resultado === 1 ? <b>R$ 0</b> :
